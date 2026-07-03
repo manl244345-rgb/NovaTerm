@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#0A0A0F</color>
+    <color name="nova_blue">#3B82F6</color>
+    <color name="nova_cyan">#06B6D4</color>
+    <color name="nova_black">#0A0A0F</color>
+    <color name="nova_surface">#121218</color>
+    <color name="nova_text_primary">#E8E8F0</color>
+    <color name="nova_text_secondary">#9898B0</color>
+    <color name="nova_green">#22C55E</color>
+    <color name="nova_amber">#F59E0B</color>
+    <color name="nova_red">#EF4444</color>
+</resources>
