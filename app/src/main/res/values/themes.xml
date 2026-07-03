@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.NovaTerm" parent="Theme.Material3.DayNight.NoActionBar">
+    <!--
+        AppCompat parent is used for the XML theme because our UI is 100% Jetpack Compose.
+        The Compose layer applies Material3 theming via MaterialTheme() in code.
+    -->
+    <style name="Theme.NovaTerm" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowBackground">@color/nova_black</item>
     </style>
 
-    <style name="Theme.NovaTerm.NoActionBar" parent="Theme.NovaTerm">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+    <style name="Theme.NovaTerm.NoActionBar" parent="Theme.NovaTerm" />
 </resources>
