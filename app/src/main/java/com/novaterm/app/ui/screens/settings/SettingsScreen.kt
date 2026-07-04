@@ -117,7 +117,7 @@ fun SettingsScreen(navController: NavController) {
                 SettingGroup(title = "Privacy & Security", icon = Icons.Default.Security, color = NovaRed) {
                     ToggleSetting("Biometric Lock", "Require biometric to open NovaTerm", false) {}
                     ActionSetting("Clear History", "Remove all command history", Icons.Default.DeleteForever)
-                    ActionSetting("Export Backup", "Backup settings and data", Icons.Default.BackupTable)
+                    ActionSetting("Export Backup", "Backup settings and data", Icons.Default.Backup)
                     ActionSetting("Restore Backup", "Restore from backup file", Icons.Default.Restore)
                 }
             }

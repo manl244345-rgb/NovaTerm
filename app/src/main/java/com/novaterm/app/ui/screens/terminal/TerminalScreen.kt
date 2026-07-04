@@ -121,7 +121,7 @@ fun TerminalScreen(
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.None,
                             imeAction = ImeAction.Send,
-                            autoCorrect = false
+                            autoCorrectEnabled = false
                         ),
                         keyboardActions = KeyboardActions(onSend = { viewModel.executeCommand() }),
                         colors = OutlinedTextFieldDefaults.colors(

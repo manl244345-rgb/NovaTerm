@@ -30,8 +30,8 @@ private val quickActions = listOf(
     QuickAction(Icons.Default.Hub, "Git", Screen.Git.route, NovaPink),
     QuickAction(Icons.Default.Lock, "SSH", Screen.Ssh.route, NovaBlue),
     QuickAction(Icons.Default.Download, "Downloads", Screen.Downloads.route, NovaCyan),
-    QuickAction(Icons.Default.Book, "Docs", Screen.Docs.route, NovaPurple),
-    QuickAction(Icons.Default.WorkspacesFilled, "Workspace", Screen.Workspace.route, NovaGreen),
+    QuickAction(Icons.Default.MenuBook, "Docs", Screen.Docs.route, NovaPurple),
+    QuickAction(Icons.Default.ViewQuilt, "Workspace", Screen.Workspace.route, NovaGreen),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
