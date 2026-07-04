@@ -64,7 +64,7 @@ fun SettingsScreen(navController: NavController) {
                     ToggleSetting("Terminal Bell", "Play sound on bell escape sequence", terminalBell) { terminalBell = it }
                     ActionSetting("Terminal Font", "Monospace", Icons.Default.Code)
                     ActionSetting("Font Size", "13px", Icons.Default.FormatSize)
-                    ActionSetting("Cursor Style", "Block", Icons.Default.TextCursor)
+                    ActionSetting("Cursor Style", "Block", Icons.Default.Edit)
                     ActionSetting("Scrollback Lines", "10000", Icons.Default.UnfoldMore)
                     ActionSetting("Default Shell", "/system/bin/sh", Icons.Default.Terminal)
                 }
