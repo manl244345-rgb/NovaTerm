@@ -99,6 +99,9 @@ dependencies {
     // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
 
+    // AppCompat (provides Theme.AppCompat.Light.NoActionBar for XML theme)
+    implementation(libs.androidx.appcompat)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
