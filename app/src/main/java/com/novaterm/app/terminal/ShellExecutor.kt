@@ -1,6 +1,8 @@
 package com.novaterm.app.terminal
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
@@ -51,8 +53,14 @@ class ShellExecutor @Inject constructor() {
             val process = processBuilder.start()
             currentProcess = process
 
-            val output = process.inputStream.bufferedReader().readText()
-            val error = process.errorStream.bufferedReader().readText()
+            // Drain stdout and stderr concurrently to prevent pipe-buffer deadlock:
+            // if either stream fills its OS buffer while we're blocking on the other,
+            // the child process stalls and waitFor() hangs indefinitely.
+            val (output, error) = coroutineScope {
+                val outDeferred = async { process.inputStream.bufferedReader().readText() }
+                val errDeferred = async { process.errorStream.bufferedReader().readText() }
+                Pair(outDeferred.await(), errDeferred.await())
+            }
             val exitCode = process.waitFor()
             currentProcess = null
 

@@ -38,7 +38,8 @@ fun EditorScreen(navController: NavController) {
     var showLineNumbers by remember { mutableStateOf(true) }
     var fontSize by remember { mutableStateOf(13) }
 
-    val selectedTab = tabs.find { it.id == selectedTabId } ?: tabs.first()
+    // Nullable: becomes null only when all tabs are closed (tabs.isEmpty())
+    val selectedTab = tabs.find { it.id == selectedTabId } ?: tabs.firstOrNull()
 
     Scaffold(
         topBar = {
@@ -67,7 +68,7 @@ fun EditorScreen(navController: NavController) {
                             )
                         }
                         IconButton(onClick = { /* Save */ }) {
-                            Icon(Icons.Default.Save, "Save", tint = if (selectedTab.isModified) NovaAmber else NovaTextSecondary)
+                            Icon(Icons.Default.Save, "Save", tint = if (selectedTab?.isModified == true) NovaAmber else NovaTextSecondary)
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = NovaSurface)
@@ -110,12 +111,12 @@ fun EditorScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(selectedTab.language.uppercase(), style = MaterialTheme.typography.labelSmall, color = NovaBlue)
+                    Text(selectedTab?.language?.uppercase() ?: "—", style = MaterialTheme.typography.labelSmall, color = NovaBlue)
                     Text("UTF-8", style = MaterialTheme.typography.labelSmall, color = NovaTextMuted)
                     Text("LF", style = MaterialTheme.typography.labelSmall, color = NovaTextMuted)
                     Text("${fontSize}px", style = MaterialTheme.typography.labelSmall, color = NovaTextMuted)
                     Spacer(Modifier.weight(1f))
-                    if (selectedTab.isModified) Text("● Modified", style = MaterialTheme.typography.labelSmall, color = NovaAmber)
+                    if (selectedTab?.isModified == true) Text("● Modified", style = MaterialTheme.typography.labelSmall, color = NovaAmber)
                 }
             }
         },
@@ -134,10 +135,12 @@ fun EditorScreen(navController: NavController) {
                 }
             }
         } else {
+            // selectedTab is non-null here: tabs.isNotEmpty() guarantees firstOrNull() returned a value
+            val tab = checkNotNull(selectedTab)
             Row(modifier = Modifier.fillMaxSize().padding(padding)) {
                 if (showLineNumbers) {
                     // Line numbers
-                    val lines = selectedTab.content.lines()
+                    val lines = tab.content.lines()
                     LazyColumn(
                         modifier = Modifier.width(48.dp).fillMaxHeight().background(NovaSurface),
                         contentPadding = PaddingValues(vertical = 8.dp)
@@ -158,7 +161,7 @@ fun EditorScreen(navController: NavController) {
                 // Code editing area
                 Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
                     BasicTextField(
-                        value = selectedTab.content,
+                        value = tab.content,
                         onValueChange = { newContent ->
                             tabs = tabs.map { if (it.id == selectedTabId) it.copy(content = newContent, isModified = true) else it }
                         },
